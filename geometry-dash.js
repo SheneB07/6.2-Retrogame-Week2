@@ -35,6 +35,16 @@ const obstacle = {
     grounded: false
 };
 
+//Driehoek
+const triangleSpeed = 3;
+const triangle = {
+    x: 1250,
+    y: 500,
+    size: 50,
+    width: 50,
+    height: 50
+};
+
 //Controls
 window.addEventListener("keydown", (e) => {
     if (e.code === "Space" && player.grounded){
@@ -50,14 +60,32 @@ function update(){
 
 //Obstakels
     obstacle.x -= obstacleSpeed;
-    
+    triangle.x -= triangleSpeed;
 
 //Grond collision
     if(player.y + player.height >= canvas.height - groundHeight){
         player.y = canvas.height - groundHeight - player.height;
         player.yVelocity = 0;
         player.grounded = true;
+    }
+//Driehoek collision = Game over
+    if(rectCollision(player, triangle)) {
+        console.log("Game over");
+        location.reload();
+    }
+
+//Blok collision
+if(
+    player.x + player.width > obstacle.x &&
+    player.x < obstacle.x + obstacleWidth &&
+    player.y + player.height <= obstacle.y + 10 &&
+    player.y + player.height + player.yVelocity >= obstacle.y
+) {
+    player.y = obstacle.y - player.height;
+    player.yVelocity = 0;
+    player.grounded = true;
 }
+
 }
 
 
@@ -77,6 +105,27 @@ function draw(){
     ctx.fillStyle = "black";
     ctx.fillRect(obstacle.x, obstacle.y, obstacleWidth, obstacleHeight);
 
+    //Driehoek
+    
+    ctx.beginPath();
+    ctx.moveTo(triangle.x, triangle.y + triangle.size);
+    ctx.lineTo(triangle.x + triangle.size /2, triangle.y);
+    ctx.lineTo(triangle.x + triangle.size, triangle.y + triangle.size);
+    ctx.closePath();
+
+    ctx.fillStyle = "black";
+    ctx.fill();
+
+}
+
+//Speler gameover
+function rectCollision(a, b){
+    return (
+        a.x < b.x + b.width &&
+        a.x + a.width > b.x &&
+        a.y < b.y + b.height &&
+        a.y + a.height > b.y
+    );
 }
 
 function gameLoop(){
