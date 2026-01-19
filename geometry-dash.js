@@ -13,7 +13,7 @@ const player = {
     height: 80,
     yVelocity: 0,
     jumpPower: -16,
-    gravity: 0.8,
+    gravity: 0.5,
     grounded: false
 };
 
@@ -51,22 +51,47 @@ let triangleList = [];
 
 const levels = [
     {
-        obstacleSpeed: 6,
+        obstacleSpeed: 5,
         obstacles: [
-            { x: 2000, y: 620, width: 80, height: 80 },
-            
+            { x: 2920, y: 620, width: 80, height: 80 },
+            { x: 4750, y: 620, width: 80, height: 80 },
+            { x: 6500, y: 620, width: 80, height: 80 },
+            { x: 6780, y: 530, width: 80, height: 80 },
+            { x: 7060, y: 620, width: 80, height: 80 }
         ],
         triangles: [
-            { x: 2080, y: 625, width: 75, height: 75}
+            { x: 2000, y: 625, width: 75, height: 75},
+            { x: 3000, y: 625, width: 75, height: 75},
+            { x: 4000, y: 625, width: 75, height: 75},
+            { x: 4000, y: 625, width: 75, height: 75},
+            { x: 4830, y: 625, width: 75, height: 75},
+            { x: 5830, y: 625, width: 75, height: 75},
+            { x: 6580, y: 625, width: 75, height: 75},
+            { x: 6660, y: 625, width: 75, height: 75},
+            { x: 6740, y: 625, width: 75, height: 75},
+            { x: 6820, y: 625, width: 75, height: 75},
+            { x: 6900, y: 625, width: 75, height: 75},
+            { x: 6980, y: 625, width: 75, height: 75},
+            { x: 7700, y: 625, width: 75, height: 75}
         ]
     },
     {
-        obstacleSpeed: 6,
+        obstacleSpeed: 5.2,
         obstacles: [
-            { x: 1800, y: 620, width: 80, height: 80 }
+            // { x: 3250, y: 620, width: 80, height: 80 },
+            // { x: 3580, y: 530, width: 80, height: 80 },
+            // { x: 3860, y: 420, width: 80, height: 80 },
+            // { x: 4140, y: 420, width: 400, height: 80 },
+            // { x: 4700, y: 420, width: 400, height: 80 }
         ],
         triangles: [
-            { x: 2280, y: 620, width: 80, height: 80}
+            // { x: 2000, y: 625, width: 75, height: 75},
+            // { x: 2750, y: 625, width: 75, height: 75},
+            // { x: 3330, y: 625, width: 75, height: 75},
+            // { x: 3405, y: 625, width: 75, height: 75},
+            // { x: 3480, y: 625, width: 75, height: 75},
+            // { x: 3555, y: 625, width: 75, height: 75},
+            // { x: 3635, y: 625, width: 75, height: 75}
         ]
     }
     
@@ -150,7 +175,7 @@ function draw(){
     ctx.lineTo(t.x + t.width, t.y + t.height);
     ctx.closePath();
 
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "red";
     ctx.fill();
 });
 }
