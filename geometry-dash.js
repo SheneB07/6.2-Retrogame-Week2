@@ -54,32 +54,81 @@ const levels = [
         obstacleSpeed: 5,
         obstacles: [
             { x: 2920, y: 620, width: 80, height: 80 },
-            { x: 4750, y: 620, width: 80, height: 80 },
-            { x: 6500, y: 620, width: 80, height: 80 },
-            { x: 6780, y: 530, width: 80, height: 80 },
-            { x: 7060, y: 620, width: 80, height: 80 }
+            { x: 4700, y: 620, width: 80, height: 80 },
+            { x: 5040, y: 470, width: 80, height: 80 },
+            { x: 5420, y: 620, width: 80, height: 80 },
+
+            { x: 6580, y: 620, width: 80, height: 80 },
+            { x: 6900, y: 480, width: 80, height: 220 },
+
+            { x: 7230, y: 340, width: 80, height: 360 },
+            { x: 7550, y: 260, width: 700, height: 440 },
+            { x: 8410, y: 350, width: 400, height: 350},
+            { x: 8970, y: 625, width: 80, height: 80},
+
+            { x: 10080, y: 580, width: 400, height: 120},
+            { x: 10600, y: 480, width: 80, height: 40},
+            { x: 11000, y: 420, width: 80, height: 40},
+            { x: 11390, y: 360, width: 80, height: 40},
+            { x: 11750, y: 350, width: 100, height: 350},
         ],
         triangles: [
-            { x: 2000, y: 625, width: 75, height: 75},
-            { x: 3000, y: 625, width: 75, height: 75},
-            { x: 4000, y: 625, width: 75, height: 75},
-            { x: 4000, y: 625, width: 75, height: 75},
-            { x: 4830, y: 625, width: 75, height: 75},
-            { x: 5830, y: 625, width: 75, height: 75},
-            { x: 6580, y: 625, width: 75, height: 75},
-            { x: 6660, y: 625, width: 75, height: 75},
-            { x: 6740, y: 625, width: 75, height: 75},
-            { x: 6820, y: 625, width: 75, height: 75},
-            { x: 6900, y: 625, width: 75, height: 75},
-            { x: 6980, y: 625, width: 75, height: 75},
-            { x: 7700, y: 625, width: 75, height: 75}
+            { x: 2000, y: 625, width: 80, height: 75},
+            { x: 3000, y: 625, width: 80, height: 75},
+            { x: 4000, y: 625, width: 80, height: 75},
+            { x: 4780, y: 625, width: 80, height: 75},
+            { x: 4860, y: 625, width: 80, height: 75},
+            { x: 4940, y: 625, width: 80, height: 75},
+            { x: 5020, y: 625, width: 80, height: 75},
+            { x: 5100, y: 625, width: 80, height: 75},
+            { x: 5180, y: 625, width: 80, height: 75},
+            { x: 5260, y: 625, width: 80, height: 75},
+            { x: 5340, y: 625, width: 80, height: 75},
+
+            { x: 6660, y: 625, width: 80, height: 75},
+            { x: 6740, y: 625, width: 80, height: 75},
+            { x: 6820, y: 625, width: 80, height: 75},
+
+            { x: 6980, y: 625, width: 80, height: 75},
+            { x: 7070, y: 625, width: 80, height: 75},
+            { x: 7150, y: 625, width: 80, height: 75},
+
+            { x: 7310, y: 625, width: 80, height: 75},
+            { x: 7390, y: 625, width: 80, height: 75},
+            { x: 7470, y: 625, width: 80, height: 75},
+            
+            { x: 8250, y: 625, width: 80, height: 75},
+            { x: 8330, y: 625, width: 80, height: 75},
+
+            { x: 8810, y: 625, width: 80, height: 75},
+            { x: 8890, y: 625, width: 80, height: 75},
+
+            { x: 10000, y: 625, width: 80, height: 75},
+
+            { x: 10480, y: 625, width: 80, height: 75},
+            { x: 10560, y: 625, width: 80, height: 75},
+            { x: 10640, y: 625, width: 80, height: 75},
+            { x: 10710, y: 625, width: 80, height: 75},
+            { x: 10790, y: 625, width: 80, height: 75},
+            { x: 10870, y: 625, width: 80, height: 75},
+            { x: 10950, y: 625, width: 80, height: 75},
+            { x: 11030, y: 625, width: 80, height: 75},
+            { x: 11110, y: 625, width: 80, height: 75},
+            { x: 11190, y: 625, width: 80, height: 75},
+            { x: 11270, y: 625, width: 80, height: 75},
+            { x: 11350, y: 625, width: 80, height: 75},
+            { x: 11430, y: 625, width: 80, height: 75},
+            { x: 11510, y: 625, width: 80, height: 75},
+            { x: 11590, y: 625, width: 80, height: 75},
+            { x: 11670, y: 625, width: 80, height: 75},
+
         ]
     },
     {
         obstacleSpeed: 5.2,
         obstacles: [
-            // { x: 3250, y: 620, width: 80, height: 80 },
-            // { x: 3580, y: 530, width: 80, height: 80 },
+            
+            
             // { x: 3860, y: 420, width: 80, height: 80 },
             // { x: 4140, y: 420, width: 400, height: 80 },
             // { x: 4700, y: 420, width: 400, height: 80 }
