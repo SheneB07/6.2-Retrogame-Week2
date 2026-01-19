@@ -172,7 +172,7 @@ function update(){
 //Driehoek collision = Game over
     triangleList.forEach(t => {
         if (rectCollision(player, t)) {
-            console.log("Game over");
+            alert("Game over");
             location.reload();
         }
     });
@@ -269,7 +269,7 @@ function checkLevelComplete(){
         if(currentLevel < levels.length) {
             loadLevel(currentLevel);
         } else {
-            console.log("Victory!")
+            alert("Victory!")
         }
     }
 }
