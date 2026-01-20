@@ -202,7 +202,7 @@ function draw(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //Grond
-    ctx.fillStyle = "#444";
+    ctx.fillStyle = "#000000ff";
     ctx.fillRect(0, groundY, canvas.width, groundHeight);
 
     //Speler
