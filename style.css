@@ -1,6 +1,7 @@
 body{
-    background-color: #002971;
-    background-repeat: no-repeat;
+    background: url(assets/image.png) repeat-x;
+    /* background-color: #002971; */
+    /* background-repeat: repeat-x; */
     background-size: 100% auto;
     margin: 0;
     padding: 0;
@@ -14,7 +15,7 @@ body{
 }
 
 canvas{
-    background-image: url(assets/background.webp);
+    background-image: url(assets/image.png);
     background-repeat: no-repeat;
     background-size: 100% auto;
     /* background: rgb(255, 255, 255); */
@@ -30,7 +31,7 @@ canvas{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 100px;
+    
     gap: 20px;
 }
 
@@ -46,13 +47,14 @@ canvas{
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 300px;
 }
 
 h2{
     font-family: 'Pixelify', sans-serif;
 }
 
-#button{
+#playbutton{
     background-color: #5c7fbb;
     height: 250px;
     width: 250px;
@@ -63,11 +65,56 @@ h2{
     transition: transform .2;
 }
 
-#button:hover{
+#giftbutton{
+    background-color: #5c7fbb;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .2;
+}
+
+#settingsbutton{
+    background-color: #5c7fbb;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .2;
+}
+
+#playbutton:hover{
+    transform: scale(1.2);
+}
+
+#giftbutton:hover{
+    transform: scale(1.2);
+}
+
+#settingsbutton:hover{
     transform: scale(1.2);
 }
 
 #play-button{
     height: 200px;
+    width: auto;
+}
+
+#gift-button{
+    height: 200px;
+    width: auto;
+}
+
+#settings-button{
+    height: 200px;
+    width: auto;
+}
+
+#title{
+    height: 60%;
     width: auto;
 }
