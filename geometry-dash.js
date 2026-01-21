@@ -280,5 +280,17 @@ function gameLoop(){
     requestAnimationFrame(gameLoop);
 }
 
+//Achtergrond animatie
+   let x = 0;
+    const speed = 0.7;
+    
+    function animate(){
+        x -= speed;
+        canvas.style.backgroundPosition = `${x}px 0`;
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
 gameLoop();
 
