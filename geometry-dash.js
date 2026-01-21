@@ -195,9 +195,6 @@ if(
 checkLevelComplete();
 }
 
-
-
-
 function draw(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -289,6 +286,24 @@ function gameLoop(){
         canvas.style.backgroundPosition = `${x}px 0`;
         requestAnimationFrame(animate);
     }
+
+//Sneeuw
+let snowflakeCount = 50;
+for(var i = 0; i<50; i++){
+    let leftSnow = Math.floor(Math.random() * canvas.clientWidth);
+    let topSnow = Math.floor(Math.random() * canvas.clientHeight);
+    let widthSnow = Math.floor(Math.random() * 50);
+    let timeSnow = Math.floor((Math.random() * 5) + 5);
+    console.log(leftSnow);
+    let div = document.createElement("div");
+    div.classList.add("snow");
+    div.style.left = leftSnow + 'px';
+    div.style.top = topSnow + 'px';
+    div.style.width = widthSnow + 'px';
+    div.style.height = widthSnow + 'px';
+    div.style.animationDuration = timeSnow + 's';
+    document.body.appendChild(div);
+}
 
     animate();
 
