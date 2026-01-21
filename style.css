@@ -15,8 +15,8 @@ body{
 }
 
 canvas{
-    background-image: url(assets/image.png);
-    background-repeat: no-repeat;
+    background: url(assets/image.png) repeat-x;
+    /* background-repeat: no-repeat; */
     background-size: 100% auto;
     /* background: rgb(255, 255, 255); */
     display: block;
@@ -117,4 +117,29 @@ h2{
 #title{
     height: 60%;
     width: auto;
+}
+
+.snow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url(assets/snowflake-icon.png);
+    background-size: cover;
+    animation: animationSnow 4s ease-in-out infinite;
+}
+
+@keyframes animationSnow {
+    0%{
+        transform: translate(0,0);
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translate(100px, 50vh);
+    }
 }
