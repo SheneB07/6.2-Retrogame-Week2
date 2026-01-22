@@ -5,39 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geometry Dash</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="start-background"></div>
     <div id="snowlayer"></div>
-    <div class="start-screen">
+    <div class="gift-screen">
         <div class="row-container">
             <div class="row">
-                
+                <a href="startscreen.html"><img src="assets/green.png"></a>
             </div>
             <div class="row">
-                <img src="assets/geometry-title.png" id="title">
+                <img src="assets/skins-title.png" id="skins-title">
             </div>
-            <div class="row">
-                <img src="assets/logo - winter edition.png" id="winter-edition">
-            </div>
+            <div class="row"></div>
         </div>
-        <div class="row-container">
-            <div class="row">
-                <a href="giftscreen.html"><div id="giftbutton"><img src="assets/gift-icon.png" id="gift-button"></div></a>
+        <div class="giftrow-container">
+           
+            <div class="gift-row">
+                <a href=""><div class="giftoption">
+                    <div id="skinbox"><img src="assets/cube-2.png" id="cube-skin"></div>
+                </div></a>
+                <a href=""><div class="giftoption">
+                    <div id="skinbox"><img src="assets/cube-5.png" id="cube-skin"></div>
+                </div></a>
+                <a href=""><div class="giftoption">
+                    <div id="skinbox"><img src="assets/cube-1.png" id="cube-skin"></div>
+                </div></a>
+                <a href=""><div class="giftoption">
+                    <div id="skinbox"><img src="assets/cube-4.jpg" id="cube-skin"></div>
+                </div></a>
+                <a href=""><div class="giftoption">
+                    <div id="skinbox"><img src="assets/cube-3.png" id="cube-skin"></div>
+                </div></a>
             </div>
-            <div class="row">
-                <a href="index.html"><div id="playbutton"><img src="assets/play-button.webp" id="play-button"></div></a>
-            </div>
-            <div class="row">
-                <a href="settingsscreen.html"><div id="settingsbutton"><img src="assets/settings-icon.png" id="settings-button"></div></a>
-            </div>
+            
         </div>
         
     </div>
 </body>
 <script>
-    let x = 0;
+     let x = 0;
     const speed = 0.8;
     
     const background = document.getElementById("start-background");
@@ -46,8 +53,6 @@
         background.style.backgroundPosition = `${x}px 0`;
         requestAnimationFrame(animate);
     }
-
-    
 
     //Sneeuw
 const snowLayer = document.getElementById("snowlayer"); 
@@ -67,6 +72,7 @@ for(var i = 0; i<50; i++){
     div.style.animationDuration = timeSnow + 's';
     snowLayer.appendChild(div);
 }
-animate();
+
+    animate();
 </script>
 </html>
