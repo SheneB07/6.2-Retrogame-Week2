@@ -13,7 +13,7 @@ const player = {
     height: 80,
     yVelocity: 0,
     jumpPower: -16,
-    gravity: 0.5,
+    gravity: 0.7,
     grounded: false
 };
 
@@ -51,7 +51,7 @@ let triangleList = [];
 
 const levels = [
     {
-        obstacleSpeed: 5,
+        obstacleSpeed: 9,
         obstacles: [
             { x: 2920, y: 620, width: 80, height: 80 },
             { x: 4700, y: 620, width: 80, height: 80 },
@@ -287,23 +287,7 @@ function gameLoop(){
         requestAnimationFrame(animate);
     }
 
-//Sneeuw
-let snowflakeCount = 50;
-for(var i = 0; i<50; i++){
-    let leftSnow = Math.floor(Math.random() * canvas.clientWidth);
-    let topSnow = Math.floor(Math.random() * canvas.clientHeight);
-    let widthSnow = Math.floor(Math.random() * 50);
-    let timeSnow = Math.floor((Math.random() * 5) + 5);
-    console.log(leftSnow);
-    let div = document.createElement("div");
-    div.classList.add("snow");
-    div.style.left = leftSnow + 'px';
-    div.style.top = topSnow + 'px';
-    div.style.width = widthSnow + 'px';
-    div.style.height = widthSnow + 'px';
-    div.style.animationDuration = timeSnow + 's';
-    document.body.appendChild(div);
-}
+
 
     animate();
 
