@@ -10,7 +10,7 @@
 <body>
     <div id="start-background"></div>
     <div id="snowlayer"></div>
-    <div class="settings-container">
+    <div id="settings-container">
             <div id="settings-box">
                 <img src="assets/settings-title.png" id="settings-title">
                 <div id="how-button">
@@ -48,6 +48,8 @@
     </div>
 </body>
 <script>
+
+    //Achtergrond animatie
     let x = 0;
     const speed = 0.8;
     
@@ -60,15 +62,13 @@
 
     
 
-    //Sneeuw
+//Sneeuw
 const snowLayer = document.getElementById("snowlayer"); 
-// let snowflakeCount = 50;
 for(var i = 0; i<50; i++){
     let leftSnow = Math.floor(Math.random() * window.innerWidth);
     let topSnow = Math.floor(Math.random() * window.innerHeight);
     let widthSnow = Math.floor(Math.random() * 60);
     let timeSnow = Math.floor((Math.random() * 5) + 5);
-    console.log(leftSnow);
     let div = document.createElement("div");
     div.classList.add("snow");
     div.style.left = leftSnow + 'px';
@@ -78,6 +78,19 @@ for(var i = 0; i<50; i++){
     div.style.animationDuration = timeSnow + 's';
     snowLayer.appendChild(div);
 }
+
+//Settings knop
+const settingsButton = document.getElementById("settings-button");
+const settingsContainer = document.getElementById("settings-container");
+
+settingsButton.addEventListener("click", () => {
+    if(settingsContainer.style.display === "none" || settingsContainer.style.display === ""){
+        settingsContainer.style.display = "flex";
+    } else {
+        settingsContainer.style.display = "none";
+    }
+});
+
 animate();
 </script>
 </html>

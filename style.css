@@ -252,7 +252,7 @@ h2{
     display: flex;
 }
 
-.settings-container{
+#settings-container{
     padding-top: 100px;
     width: 100%;
     height: auto;
@@ -264,8 +264,8 @@ h2{
 }
 
 #settings-box{
-    width: 650px;
-    height: 550px;
+    width: 450px;
+    height: 350px;
     background-color: #796237;
     display: flex;
     border: 5px solid #65e516;
@@ -275,13 +275,12 @@ h2{
     padding: 20px;
     flex-direction: column;
     align-items: center;
-    gap: 60px;
+    gap: 15px;
 }
 
 #settings-title{
     width: 380px;
     height: 80px;
-    padding-bottom: 80px;
 }
 
 #how-button{
