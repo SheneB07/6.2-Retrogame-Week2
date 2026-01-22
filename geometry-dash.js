@@ -286,5 +286,14 @@ function gameLoop(){
 
     animate();
 
+//Achtergrond muziek
+const music = document.getElementById("background-music");
+window.addEventListener("load", () => {
+    music.volume = 0.5;
+    music.play().catch(() =>{
+        console.log("play music")
+    })
+})
+
 gameLoop();
 
