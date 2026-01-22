@@ -242,9 +242,14 @@ h2{
     align-items: center;
 }
 
-#cube-skin{
+.cube-skin{
     width: 150px;
     height: auto;
+    cursor: pointer;
+}
+
+.skin-container{
+    display: flex;
 }
 
 .settings-container{
