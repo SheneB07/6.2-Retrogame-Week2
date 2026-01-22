@@ -11,13 +11,22 @@ canvas.height = 700;
 const player = {
     x: 500,
     y: 300,
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     yVelocity: 0,
     jumpPower: -17,
     gravity: 0.7,
-    grounded: false
+    grounded: false,
+    rotation: 0,
+    rotationSpeed: 0.13,
+    skin: new Image()
 };
+
+// Load the skin from localStorage (or default if nothing chosen)
+const savedSkin = localStorage.getItem("selectedSkin");
+player.skin.src = savedSkin ? savedSkin : "assets/cube-1.png";
+
+
 
 //Grond
 const groundHeight = 50;
@@ -36,9 +45,15 @@ const obstacle = {
     grounded: false
 };
 
+//Speler
+const playerImage = new Image();
+playerImage.src = "assets/cube-2.png"
+
 //Blok
 const blockImage = new Image();
 blockImage.src = "assets/block.png";
+
+
 
 //Driehoek
 const triangleSpeed = 6;
@@ -110,12 +125,6 @@ function update(){
             location.reload();
         }
     });
-        
-
-            
-    
-           
-        
 
 //Blok collision
 obstacleList.forEach(o => {
@@ -140,6 +149,12 @@ obstacleList.forEach(o => {
     }
 });
 
+if(!player.grounded) {
+    player.rotation += player.rotationSpeed;
+} else {
+    player.rotation = 0;
+}
+
 
 
 
@@ -154,11 +169,13 @@ function draw(){
     ctx.fillRect(0, groundY, canvas.width, groundHeight);
 
     //Speler
-    ctx.fillStyle = "#ff9100ff";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
+    ctx.save();
+    ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
+    ctx.rotate(player.rotation);
+    ctx.drawImage(player.skin, -player.width / 2, -player.height / 2, player.width, player.height);
+    ctx.restore();
 
     //Obstakel
-    
     obstacleList.forEach(o => {
         ctx.drawImage(blockImage, o.x, o.y, o.width, o.height);
     });

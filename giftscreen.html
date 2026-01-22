@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geometry Dash</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <div id="start-background"></div>
@@ -22,21 +23,21 @@
         <div class="giftrow-container">
            
             <div class="gift-row">
-                <a href=""><div class="giftoption">
-                    <div id="skinbox"><img src="assets/cube-2.png" id="cube-skin"></div>
-                </div></a>
-                <a href=""><div class="giftoption">
-                    <div id="skinbox"><img src="assets/cube-5.png" id="cube-skin"></div>
-                </div></a>
-                <a href=""><div class="giftoption">
-                    <div id="skinbox"><img src="assets/cube-1.png" id="cube-skin"></div>
-                </div></a>
-                <a href=""><div class="giftoption">
-                    <div id="skinbox"><img src="assets/cube-4.jpg" id="cube-skin"></div>
-                </div></a>
-                <a href=""><div class="giftoption">
-                    <div id="skinbox"><img src="assets/cube-3.png" id="cube-skin"></div>
-                </div></a>
+                <div class="giftoption">
+                <img src="assets/cube-1.png" class="cube-skin">
+                </div>
+                <div class="giftoption">
+                <img src="assets/cube-2.png" class="cube-skin">
+                </div>
+                <div class="giftoption">
+                <img src="assets/cube-3.png" class="cube-skin">
+                </div>
+                <div class="giftoption">
+                <img src="assets/cube-4.jpg" class="cube-skin">
+                </div>
+                <div class="giftoption">
+                <img src="assets/cube-5.png" class="cube-skin">
+                </div>
             </div>
             
         </div>
@@ -56,13 +57,11 @@
 
     //Sneeuw
 const snowLayer = document.getElementById("snowlayer"); 
-// let snowflakeCount = 50;
 for(var i = 0; i<50; i++){
     let leftSnow = Math.floor(Math.random() * window.innerWidth);
     let topSnow = Math.floor(Math.random() * window.innerHeight);
     let widthSnow = Math.floor(Math.random() * 60);
     let timeSnow = Math.floor((Math.random() * 5) + 5);
-    console.log(leftSnow);
     let div = document.createElement("div");
     div.classList.add("snow");
     div.style.left = leftSnow + 'px';
@@ -72,6 +71,16 @@ for(var i = 0; i<50; i++){
     div.style.animationDuration = timeSnow + 's';
     snowLayer.appendChild(div);
 }
+
+const skins = document.querySelectorAll(".cube-skin");
+
+skins.forEach(skin => {
+    skin.addEventListener("click", () => {
+        localStorage.setItem("selectedSkin", skin.src);
+        console.log("Selected skin:", skin.src);
+    });
+});
+
 
     animate();
 </script>
