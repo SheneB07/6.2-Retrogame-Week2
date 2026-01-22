@@ -1,6 +1,8 @@
 const canvas = document.getElementById("game-board");
 const ctx = canvas.getContext("2d");
 
+const   TILE_SIZE = 90;
+
 //Canvas grootte
 canvas.width = 1300;
 canvas.height = 700;
@@ -12,14 +14,14 @@ const player = {
     width: 80,
     height: 80,
     yVelocity: 0,
-    jumpPower: -16,
+    jumpPower: -17,
     gravity: 0.7,
     grounded: false
 };
 
 //Grond
 const groundHeight = 50;
-const groundOffset = -50;
+const groundOffset = -65;
 const groundY = canvas.height - groundHeight - groundOffset;
 
 //Vierkant
@@ -29,10 +31,14 @@ const obstacleHeight = 80;
 const obstacle = {
     x: 2000,
     y: 620,
-    width: 80,
-    height: 80,
+    width: 50,
+    height: 50,
     grounded: false
 };
+
+//Blok
+const blockImage = new Image();
+blockImage.src = "assets/block.png";
 
 //Driehoek
 const triangleSpeed = 6;
@@ -44,107 +50,29 @@ const triangle = {
     height: 75
 };
 
-//levels
+const tileMap = [
+    [
+    "........................",
+    "........................",
+    "........................",
+    ".......^#...............",
+    "........................",
+    ".......................",
+    ],
+    [
+    "........................",
+    "........................",
+    "........................",
+    "........##..............",
+    "........................",
+    ".......................",
+    ],
+]
+
 let currentLevel = 0;
 let obstacleList = [];
 let triangleList = [];
 
-const levels = [
-    {
-        obstacleSpeed: 9,
-        obstacles: [
-            { x: 2920, y: 620, width: 80, height: 80 },
-            { x: 4700, y: 620, width: 80, height: 80 },
-            { x: 5040, y: 470, width: 80, height: 80 },
-            { x: 5420, y: 620, width: 80, height: 80 },
-
-            { x: 6580, y: 620, width: 80, height: 80 },
-            { x: 6900, y: 480, width: 80, height: 220 },
-
-            { x: 7230, y: 340, width: 80, height: 360 },
-            { x: 7550, y: 260, width: 700, height: 440 },
-            { x: 8410, y: 350, width: 400, height: 350},
-            { x: 8970, y: 625, width: 80, height: 80},
-
-            { x: 10080, y: 580, width: 400, height: 120},
-            { x: 10600, y: 480, width: 80, height: 40},
-            { x: 11000, y: 420, width: 80, height: 40},
-            { x: 11390, y: 360, width: 80, height: 40},
-            { x: 11750, y: 350, width: 100, height: 350},
-        ],
-        triangles: [
-            { x: 2000, y: 625, width: 80, height: 75},
-            { x: 3000, y: 625, width: 80, height: 75},
-            { x: 4000, y: 625, width: 80, height: 75},
-            { x: 4780, y: 625, width: 80, height: 75},
-            { x: 4860, y: 625, width: 80, height: 75},
-            { x: 4940, y: 625, width: 80, height: 75},
-            { x: 5020, y: 625, width: 80, height: 75},
-            { x: 5100, y: 625, width: 80, height: 75},
-            { x: 5180, y: 625, width: 80, height: 75},
-            { x: 5260, y: 625, width: 80, height: 75},
-            { x: 5340, y: 625, width: 80, height: 75},
-
-            { x: 6660, y: 625, width: 80, height: 75},
-            { x: 6740, y: 625, width: 80, height: 75},
-            { x: 6820, y: 625, width: 80, height: 75},
-
-            { x: 6980, y: 625, width: 80, height: 75},
-            { x: 7070, y: 625, width: 80, height: 75},
-            { x: 7150, y: 625, width: 80, height: 75},
-
-            { x: 7310, y: 625, width: 80, height: 75},
-            { x: 7390, y: 625, width: 80, height: 75},
-            { x: 7470, y: 625, width: 80, height: 75},
-            
-            { x: 8250, y: 625, width: 80, height: 75},
-            { x: 8330, y: 625, width: 80, height: 75},
-
-            { x: 8810, y: 625, width: 80, height: 75},
-            { x: 8890, y: 625, width: 80, height: 75},
-
-            { x: 10000, y: 625, width: 80, height: 75},
-
-            { x: 10480, y: 625, width: 80, height: 75},
-            { x: 10560, y: 625, width: 80, height: 75},
-            { x: 10640, y: 625, width: 80, height: 75},
-            { x: 10710, y: 625, width: 80, height: 75},
-            { x: 10790, y: 625, width: 80, height: 75},
-            { x: 10870, y: 625, width: 80, height: 75},
-            { x: 10950, y: 625, width: 80, height: 75},
-            { x: 11030, y: 625, width: 80, height: 75},
-            { x: 11110, y: 625, width: 80, height: 75},
-            { x: 11190, y: 625, width: 80, height: 75},
-            { x: 11270, y: 625, width: 80, height: 75},
-            { x: 11350, y: 625, width: 80, height: 75},
-            { x: 11430, y: 625, width: 80, height: 75},
-            { x: 11510, y: 625, width: 80, height: 75},
-            { x: 11590, y: 625, width: 80, height: 75},
-            { x: 11670, y: 625, width: 80, height: 75},
-
-        ]
-    },
-    {
-        obstacleSpeed: 5.2,
-        obstacles: [
-            
-            
-            // { x: 3860, y: 420, width: 80, height: 80 },
-            // { x: 4140, y: 420, width: 400, height: 80 },
-            // { x: 4700, y: 420, width: 400, height: 80 }
-        ],
-        triangles: [
-            // { x: 2000, y: 625, width: 75, height: 75},
-            // { x: 2750, y: 625, width: 75, height: 75},
-            // { x: 3330, y: 625, width: 75, height: 75},
-            // { x: 3405, y: 625, width: 75, height: 75},
-            // { x: 3480, y: 625, width: 75, height: 75},
-            // { x: 3555, y: 625, width: 75, height: 75},
-            // { x: 3635, y: 625, width: 75, height: 75}
-        ]
-    }
-    
-];
 
 //Controls
 window.addEventListener("keydown", (e) => {
@@ -171,25 +99,48 @@ function update(){
     }
 //Driehoek collision = Game over
     triangleList.forEach(t => {
-        if (rectCollision(player, t)) {
+        const hitbox = {
+            x: t.x + 10,
+            y: t.y + 10,
+            width: t.width,
+            height: t.height - 20
+        };
+        if (rectCollision(player, hitbox)) {
             alert("Game over");
             location.reload();
         }
     });
+        
+
+            
+    
+           
+        
 
 //Blok collision
 obstacleList.forEach(o => {
-if(
-    player.x + player.width > o.x &&
-    player.x < o.x + o.width &&
-    player.y + player.height <= o.y + 10 &&
-    player.y + player.height + player.yVelocity >= o.y
-) {
-    player.y = o.y - player.height;
-    player.yVelocity = 0;
-    player.grounded = true;
-}
-    });
+    const playerBottom = player.y + player.height;
+    const playerTop = player.y;
+
+    // horizontal overlap
+    const overlapX =
+        player.x + player.width > o.x &&
+        player.x < o.x + o.width;
+
+    // landing on top
+    if (
+        overlapX &&
+        player.yVelocity >= 0 && // falling
+        playerBottom <= o.y + player.yVelocity &&
+        playerBottom >= o.y
+    ) {
+        player.y = o.y - player.height;
+        player.yVelocity = 0;
+        player.grounded = true;
+    }
+});
+
+
 
 
 checkLevelComplete();
@@ -207,9 +158,9 @@ function draw(){
     ctx.fillRect(player.x, player.y, player.width, player.height);
 
     //Obstakel
-    ctx.fillStyle = "black";
+    
     obstacleList.forEach(o => {
-        ctx.fillRect(o.x, o.y, o.width, o.height);
+        ctx.drawImage(blockImage, o.x, o.y, o.width, o.height);
     });
     
 
@@ -235,6 +186,10 @@ function resizeCanvas(){
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+function getGroundY(){
+    return canvas.height - groundHeight;
+}
+
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
@@ -248,13 +203,36 @@ function rectCollision(a, b){
     );
 }
 
-function loadLevel(index){
-    const level = levels[index];
+function loadLevel(levelIndex){
 
-    obstacleList = level.obstacles.map(o => ({...o}));
-    triangleList = level.triangles.map(t => ({...t}));
+            obstacleList = [];
+            triangleList = [];
 
-    obstacleSpeed = level.obstacleSpeed;
+            const map = tileMap[levelIndex];
+
+        map.forEach((row, rowIndex) => {
+            [...row].forEach((tile, colIndex) => {
+                        const x = colIndex * TILE_SIZE + canvas.width;
+                        const y = getGroundY() - TILE_SIZE * (map.length - rowIndex);
+
+                    if(tile === "#"){
+                        obstacleList.push({
+                        x,
+                        y,
+                        width: TILE_SIZE,
+                        height: TILE_SIZE,
+                        });
+                    }
+                if (tile === "^") {
+                    triangleList.push({
+                        x,
+                        y,
+                        width: TILE_SIZE / 1,
+                        height: TILE_SIZE,
+                    });
+                }
+            });
+        });
 }
 
 loadLevel(currentLevel);
@@ -263,7 +241,7 @@ function checkLevelComplete(){
     const lastObstacle = obstacleList[obstacleList.length - 1];
     if(lastObstacle && lastObstacle.x + lastObstacle.width < 0){
         currentLevel++;
-        if(currentLevel < levels.length) {
+        if(currentLevel < tileMap.length) {
             loadLevel(currentLevel);
         } else {
             alert("Victory!")

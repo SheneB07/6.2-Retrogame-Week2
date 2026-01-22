@@ -251,7 +251,7 @@ h2{
     padding-top: 100px;
     width: 100%;
     height: auto;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     position: fixed;
