@@ -129,6 +129,10 @@ h2{
     width: auto;
 }
 
+#settings-button:hover{
+    cursor: pointer;
+}
+
 #title{
     height: 60%;
     width: auto;
@@ -243,3 +247,55 @@ h2{
     height: auto;
 }
 
+.settings-container{
+    padding-top: 100px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 3;
+}
+
+#settings-box{
+    width: 650px;
+    height: 550px;
+    background-color: #796237;
+    display: flex;
+    border: 5px solid #65e516;
+    border-radius: 25px;
+    box-shadow: 10px 10px  #31332f;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+#settings-title{
+    width: 380px;
+    height: 80px;
+    padding-bottom: 80px;
+}
+
+#how-button{
+    width: 300px;
+    height: 80px;
+    border-radius: 50px;
+    background-color: #65e516;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid black;
+}
+
+#how-title{
+    width: 280px;
+    height: 40px;
+}
+
+#music-on-icon{
+    width: 100px;
+    height: auto;
+}
