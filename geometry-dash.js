@@ -14,8 +14,8 @@ const player = {
     width: 100,
     height: 100,
     yVelocity: 0,
-    jumpPower: -17,
-    gravity: 0.7,
+    jumpPower: -12,
+    gravity: 0.6,
     grounded: false,
     rotation: 0,
     rotationSpeed: 0.13,
@@ -34,7 +34,7 @@ const groundOffset = -65;
 const groundY = canvas.height - groundHeight - groundOffset;
 
 //Vierkant
-let obstacleSpeed = 6;
+let obstacleSpeed = 15;
 const obstacleWidth = 80;
 const obstacleHeight = 80;
 const obstacle = {
@@ -53,10 +53,13 @@ playerImage.src = "assets/cube-2.png"
 const blockImage = new Image();
 blockImage.src = "assets/block.png";
 
+//Ster
+const starImage = new Image();
+starImage.src = "assets/star-icon.webp"
 
 
 //Driehoek
-const triangleSpeed = 6;
+const triangleSpeed = 15;
 const triangle = {
     x: 2080,
     y: 625,
@@ -65,12 +68,14 @@ const triangle = {
     height: 75
 };
 
+let gameState = "playing";
+
 const tileMap = [
     [
     "................................................................................................................................................",
     ".............................#...#...#...#...#......................................................######......................................",
-    "..........................#..#.............................................................######............#...#...#..........................",
-    ".......^#.......^#.....#^^#^^#^^^^^^^^^^^^^^^^^^#..........^............^..............#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#............^#.........",
+    "..........................#..#.............................................................######............#...#...#................*.........",
+    ".......^#.......^#.....#^^#^^#^^^^^^^^^^^^^^^^^^#..........^#...........^#.............#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#............^#.........",
     "................................................................................................................................................",
     "................................................................................................................................................"
     ],
@@ -111,6 +116,8 @@ const tileMap = [
 let currentLevel = 0;
 let obstacleList = [];
 let triangleList = [];
+
+let starList = [];
 
 
 //Controls
@@ -179,10 +186,17 @@ if(!player.grounded) {
     player.rotation = 0;
 }
 
+starList.forEach(s => s.x -= obstacleSpeed);
+
+starList.forEach(s => {
+    if(rectCollision(player, s)){
+         alert("Victory!");
+        starList = [];
+    }
+})
 
 
 
-checkLevelComplete();
 }
 
 function draw(){
@@ -216,6 +230,11 @@ function draw(){
     ctx.fillStyle = "red";
     ctx.fill();
 });
+
+//Ster
+starList.forEach(s => {
+    ctx.drawImage(starImage, s.x, s.y, s.width, s.height);
+});
 }
 
 function resizeCanvas(){
@@ -248,6 +267,7 @@ function loadLevel(levelIndex){
 
             obstacleList = [];
             triangleList = [];
+            starList = [];
 
             const map = tileMap[levelIndex];
 
@@ -258,19 +278,15 @@ function loadLevel(levelIndex){
 
                     if(tile === "#"){
                         obstacleList.push({
-                        x,
-                        y,
-                        width: TILE_SIZE,
-                        height: TILE_SIZE,
-                        });
+                        x, y, width: TILE_SIZE, height: TILE_SIZE });
                     }
                 if (tile === "^") {
                     triangleList.push({
-                        x,
-                        y,
-                        width: TILE_SIZE / 1,
-                        height: TILE_SIZE,
-                    });
+                        x, y, width: TILE_SIZE, height: TILE_SIZE });
+                }
+                if (tile === "*") {
+                    starList.push({
+                        x, y, width: TILE_SIZE, height: TILE_SIZE });
                 }
             });
         });
@@ -278,21 +294,9 @@ function loadLevel(levelIndex){
 
 loadLevel(currentLevel);
 
-const LEVEL_LENGTH = 510;
-
-function checkLevelComplete(){
-    if(player.x >= LEVEL_LENGTH){
-        currentLevel++;
-        if(currentLevel < tileMap.length) {
-            loadLevel(currentLevel);
-        } else {
-            alert("Victory!")
-        }
-    }
-}
 
 function gameLoop(){
-    update();
+      update();  
     draw();
     requestAnimationFrame(gameLoop);
 }
@@ -307,6 +311,22 @@ function gameLoop(){
         requestAnimationFrame(animate);
     }
 
+    //Sneeuw
+const snowLayer = document.getElementById("snowlayer"); 
+for(var i = 0; i<50; i++){
+    let leftSnow = Math.floor(Math.random() * window.innerWidth);
+    let topSnow = Math.floor(Math.random() * window.innerHeight);
+    let widthSnow = Math.floor(Math.random() * 60);
+    let timeSnow = Math.floor((Math.random() * 5) + 5);
+    let div = document.createElement("div");
+    div.classList.add("snow");
+    div.style.left = leftSnow + 'px';
+    div.style.top = topSnow + 'px';
+    div.style.width = widthSnow + 'px';
+    div.style.height = widthSnow + 'px';
+    div.style.animationDuration = timeSnow + 's';
+    snowLayer.appendChild(div);
+}
 
 
     animate();

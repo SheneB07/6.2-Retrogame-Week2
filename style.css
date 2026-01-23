@@ -15,13 +15,14 @@ body{
 }
 
 canvas{
-    background: url(assets/image.png) repeat-x;
-    /* background-repeat: no-repeat; */
+    /* background: url(assets/image.png) repeat-x; */
+    
     background-size: 100% auto;
-    /* background: rgb(255, 255, 255); */
     display: block;
     width: 100vw;
     height: 100vw;
+    position: relative;
+    z-index: 2;
 }
 
 #start-background{
@@ -270,12 +271,11 @@ h2{
     display: flex;
     border: 5px solid #65e516;
     border-radius: 25px;
-    box-shadow: 10px 10px  #31332f;
-    justify-content: center;
-    padding: 20px;
+    box-shadow: 10px 10px  #31332f;    
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    text-align: center;
+    padding: 15px;
 }
 
 #settings-title{
@@ -302,5 +302,24 @@ h2{
 #music-on-icon{
     width: 100px;
     height: auto;
+}
+
+.victory {
+    width: 100px;
+    height: 100px;
+    background-color: #65e516;
+}
+
+.hidden {
+    display: none;
+}
+
+#button{
+    cursor: pointer;
+}
+
+h2{
+    color: white;
+    font-size: 30px;
 }
 
