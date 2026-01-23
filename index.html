@@ -9,8 +9,21 @@
 </head>
 <body>
     <audio id="background-music" src="assets/audio.mp3" loop></audio>
-    <div class="snowlayer"></div>
+    <div id="start-background"></div>
+    <div id="snowlayer"></div>
     <canvas id="game-board"></canvas>
+
+    <!-- Game over sherm -->
+    <div id="game-over-screen" class="overlay hidden">
+        <img src="assets/gameover-title.png">
+        <button id="retry-button">Retry</button>
+    </div>
+    
+    <!-- Victory sherm -->
+    <div id="victory-screen" class="victory hidden">
+        <img src="assets/victory-title.png">
+        <button id="next-button">Next Level</button>
+    </div>
     <script src="geometry-dash.js"></script>
 </body>
 </html>
