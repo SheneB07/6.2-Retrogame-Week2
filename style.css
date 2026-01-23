@@ -323,3 +323,54 @@ h2{
     font-size: 30px;
 }
 
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+#retry-button{
+    width: 300px;
+    height: 80px;
+    border-radius: 50px;
+    background-color: #5c7fbb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid black;
+    cursor: pointer;
+}
+
+#retry-image{
+    width: 170px;
+    height: 40px;
+}
+
+#next-button{
+    width: 300px;
+    height: 80px;
+    border-radius: 50px;
+    background-color: #5c7fbb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid black;
+    cursor: pointer;
+}
+
+#next-image{
+    width: 240px;
+    height: 40px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+

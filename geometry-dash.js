@@ -1,6 +1,8 @@
+//Canvas
 const canvas = document.getElementById("game-board");
 const ctx = canvas.getContext("2d");
 
+//Blok grootte 
 const   TILE_SIZE = 90;
 
 //Canvas grootte
@@ -22,10 +24,16 @@ const player = {
     skin: new Image()
 };
 
-// Load the skin from localStorage (or default if nothing chosen)
+//Skins inladen
 const savedSkin = localStorage.getItem("selectedSkin");
 player.skin.src = savedSkin ? savedSkin : "assets/cube-1.png";
 
+//Game-over & Victory schermen
+const gameOverScreen = document.getElementById("game-over-screen");
+const victoryScreen = document.getElementById("victory-screen");
+
+const retryButton = document.getElementById("retry-button");
+const nextButton = document.getElementById("next-button");
 
 
 //Grond
@@ -57,7 +65,6 @@ blockImage.src = "assets/block.png";
 const starImage = new Image();
 starImage.src = "assets/star-icon.webp"
 
-
 //Driehoek
 const triangleSpeed = 7;
 const triangle = {
@@ -70,6 +77,7 @@ const triangle = {
 
 let gameState = "playing";
 
+//Level mappen 
 const tileMap = [
     [
     "................................................................................................................................................",
@@ -129,6 +137,8 @@ window.addEventListener("keydown", (e) => {
 });
 
 function update(){
+if(gameState !== "playing") return;
+
 //Zwaartekracht
     player.yVelocity += player.gravity;
     player.y += player.yVelocity;
@@ -152,8 +162,8 @@ function update(){
             height: t.height - 20
         };
         if (rectCollision(player, hitbox)) {
-            alert("Game over");
-            location.reload();
+            showGameOver();
+            console.log("activated");
         }
     });
 
@@ -190,12 +200,11 @@ starList.forEach(s => s.x -= obstacleSpeed);
 
 starList.forEach(s => {
     if(rectCollision(player, s)){
-         alert("Victory!");
-        starList = [];
-        currentLevel = currentLevel+1;
-        loadLevel(currentLevel);
+        showVictory();
+        console.log("activated");
     }
 })
+
 
 
 
@@ -296,12 +305,40 @@ function loadLevel(levelIndex){
 
 loadLevel(currentLevel);
 
-
+//Gameover & victory
 function gameLoop(){
       update();  
     draw();
     requestAnimationFrame(gameLoop);
 }
+
+function showGameOver() {
+    gameState = "paused";
+    gameOverScreen.classList.remove("hidden");
+}
+
+function showVictory() {
+    gameState = "paused";
+    victoryScreen.classList.remove("hidden");
+}
+
+function hideScreens() {
+    gameOverScreen.classList.add("hidden");
+    victoryScreen.classList.add("hidden");
+}
+
+retryButton.addEventListener("click", () => {
+    location.reload();
+});
+
+nextButton.addEventListener("click", () => {
+    hideScreens();
+    currentLevel++;
+    loadLevel(currentLevel);
+    gameState = "playing";
+});
+
+
 
 //Achtergrond animatie
    let x = 0;
