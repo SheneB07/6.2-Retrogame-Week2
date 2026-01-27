@@ -155,19 +155,38 @@ function update() {
         player.yVelocity = 0;
         player.grounded = true;
     }
-    //Driehoek collision = Game over
+
+
     triangleList.forEach(t => {
-        const hitbox = {
-            x: t.x + 10,
-            y: t.y + 10,
-            width: t.width,
-            height: t.height - 20
-        };
-        if (rectCollision(player, hitbox)) {
-            showGameOver();
-            console.log("activated");
-        }
-    });
+    const A = {x: t.x, y: t.y + t.height};
+    const B = {x: t.x + t.width / 2, y: t.y};
+    const C = {x: t.x + t.width, y: t.y + t.height};
+
+    const playerPoints = [
+    {x: player.x, y: player.y},
+    {x: player.x + player.width, y: player.y},
+    {x: player.x, y: player.y + player.height},
+    {x: player.x + player.width, y: player.y + player.height}
+];
+
+if(playerPoints.some(p => pointInTriangle(p, A, B, C))){
+    showGameOver();
+}
+
+});
+    //Driehoek collision = Game over
+    // triangleList.forEach(t => {
+    //     const hitbox = {
+    //         x: t.x + 10,
+    //         y: t.y + 10,
+    //         width: t.width,
+    //         height: t.height - 20
+    //     };
+    //     if (rectCollision(player, hitbox)) {
+    //         showGameOver();
+    //         console.log("activated");
+    //     }
+    // });
 
     //Blok collision
     obstacleList.forEach(o => {
@@ -273,6 +292,24 @@ function rectCollision(a, b) {
         a.y + a.height > b.y
     );
 }
+
+function pointInTriangle(p, a ,b ,c){
+    const sign = (p1, p2, p3) =>
+    (p1.x - p3.x) * (p2.y - p3.y) -
+    (p2.x - p3.x) * (p1.y - p3.y);
+
+    const d1 = sign (p, a, b);
+    const d2 = sign (p, b ,c);
+    const d3 = sign (p, c, a);
+
+    const hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+    const hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+    return!(hasNeg && hasPos);
+}
+
+
+
 //Level laden
 function loadLevel(levelIndex) {
 
