@@ -43,19 +43,6 @@ const groundY = canvas.height - groundHeight - groundOffset;
 
 //Vierkant
 let obstacleSpeed = 7;
-const obstacleWidth = 80;
-const obstacleHeight = 80;
-const obstacle = {
-    x: 2000,
-    y: 620,
-    width: 50,
-    height: 50,
-    grounded: false
-};
-
-//Speler
-const playerImage = new Image();
-playerImage.src = "assets/cube-2.png"
 
 //Blok
 const blockImage = new Image();
@@ -64,16 +51,6 @@ blockImage.src = "assets/block.png";
 //Ster
 const starImage = new Image();
 starImage.src = "assets/star-icon.webp"
-
-//Driehoek
-const triangleSpeed = 7;
-const triangle = {
-    x: 2080,
-    y: 625,
-    size: 75,
-    width: 75,
-    height: 75
-};
 
 let gameState = "playing";
 
@@ -174,41 +151,38 @@ if(playerPoints.some(p => pointInTriangle(p, A, B, C))){
 }
 
 });
-    //Driehoek collision = Game over
-    // triangleList.forEach(t => {
-    //     const hitbox = {
-    //         x: t.x + 10,
-    //         y: t.y + 10,
-    //         width: t.width,
-    //         height: t.height - 20
-    //     };
-    //     if (rectCollision(player, hitbox)) {
-    //         showGameOver();
-    //         console.log("activated");
-    //     }
-    // });
-
     //Blok collision
-    obstacleList.forEach(o => {
-        const playerBottom = player.y + player.height;
-        const playerTop = player.y;
+obstacleList.forEach(o => {
+    if (!rectCollision(player, o)) return;
 
-        const overlapX =
-            player.x + player.width > o.x &&
-            player.x < o.x + o.width;
+    if (
+        player.yVelocity > 0 &&
+        player.y + player.height - player.yVelocity <= o.y
+    ) {
+        player.y = o.y - player.height;
+        player.yVelocity = 0;
+        player.grounded = true;
+    }
+    else if (
+        player.yVelocity < 0 &&
+        player.y - player.yVelocity >= o.y + o.height
+    ) {
+        player.y = o.y + o.height;
+        player.yVelocity = 0;
+    }
+    else if (player.x + player.width / 2 < o.x + o.width / 2) {
+        player.x = o.x - player.width;
+    }
+    else {
+        player.x = o.x + o.width;
+    }
+});
 
+//Game over - van level afgeduwd
+if (player.x + player.width < 0) {
+    showGameOver();
+}
 
-        if (
-            overlapX &&
-            player.yVelocity >= 0 &&
-            playerBottom <= o.y + player.yVelocity &&
-            playerBottom >= o.y
-        ) {
-            player.y = o.y - player.height;
-            player.yVelocity = 0;
-            player.grounded = true;
-        }
-    });
 
     //Blok rotatie
     if (!player.grounded) {
